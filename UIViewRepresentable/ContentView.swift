@@ -10,10 +10,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Hello, world!")
+            Text("Basic UIView Representable")
             basicUIViewRepresentable()
+                .ignoresSafeArea(.all)
         }
-        .padding()
     }
 }
 
