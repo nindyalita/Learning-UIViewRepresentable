@@ -23,14 +23,17 @@ struct basicUIViewRepresentable: UIViewRepresentable{
 struct UITextFieldViewRepresentable: UIViewRepresentable{
     @Binding var text: String
     
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context: Context) -> UITextField {
         let textField = getTextField()
         textField.delegate = context.coordinator
         return textField
     }
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+    
+    //send data from SwiftUI to UIKit
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
     }
+    
     private func getTextField() -> UITextField{
         let textField = UITextField(frame: .zero)
         
@@ -44,6 +47,7 @@ struct UITextFieldViewRepresentable: UIViewRepresentable{
         return textField
     }
     
+    //send data from UIKit to SwiftUI
     func makeCoordinator() -> Coordinator {
         return Coordinator(text: $text)
     }
