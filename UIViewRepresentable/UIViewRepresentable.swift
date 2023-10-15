@@ -22,6 +22,14 @@ struct basicUIViewRepresentable: UIViewRepresentable{
 
 struct UITextFieldViewRepresentable: UIViewRepresentable{
     @Binding var text: String
+    var placaholder: String
+    let placeholderColor: UIColor
+    
+    init(text: Binding<String>, placaholder:String = "default...", placeholderColor: UIColor = .red) {
+        self._text = text
+        self.placaholder = placaholder
+        self.placeholderColor = placeholderColor
+    }
     
     func makeUIView(context: Context) -> UITextField {
         let textField = getTextField()
@@ -38,13 +46,19 @@ struct UITextFieldViewRepresentable: UIViewRepresentable{
         let textField = UITextField(frame: .zero)
         
         let placeholder = NSAttributedString(
-            string: "Type here...",
+            string: placaholder,
             attributes: [
-                .foregroundColor : UIColor.red
+                .foregroundColor : placeholderColor
             ]
         )
         textField.attributedPlaceholder = placeholder
         return textField
+    }
+    
+    func updatePlaceholder(_ text: String) -> UITextFieldViewRepresentable{
+        var viewRepresentable = self
+        viewRepresentable.placaholder = text
+        return viewRepresentable
     }
     
     //send data from UIKit to SwiftUI

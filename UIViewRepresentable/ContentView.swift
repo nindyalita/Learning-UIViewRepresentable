@@ -28,6 +28,7 @@ struct ContentView: View {
             HStack {
                 Text("UIKit")
                 UITextFieldViewRepresentable(text: $text)
+                    .updatePlaceholder("new placeholder")
                     .frame(height: 55)
                 .background(.blue)
             }
